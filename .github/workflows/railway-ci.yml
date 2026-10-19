@@ -1,0 +1,65 @@
+name: Validar aplicação e container Railway
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: curriculo
+          POSTGRES_PASSWORD: ci_only
+          POSTGRES_DB: curriculo_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U curriculo"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 15
+    env:
+      DATABASE_URL: postgresql://curriculo:ci_only@127.0.0.1:5432/curriculo_test
+      APP_URL: http://localhost:5173
+      NODE_ENV: test
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci --workspaces=false --include=dev
+      - run: npm run db:generate
+      - run: npm run db:deploy
+      - run: npm run build
+      - run: node node_modules/playwright/cli.js install --with-deps --only-shell chromium
+      - run: npm test
+        env:
+          RUN_INTEGRATION: "1"
+          RUN_PDF_TESTS: "1"
+      - run: docker build -t forma-railway:ci .
+      - name: Iniciar a imagem de produção
+        run: >-
+          docker run -d --name forma-ci --network host
+          -e NODE_ENV=production
+          -e APP_URL=https://forma.example.test
+          -e DATABASE_URL
+          -e PORT=3001
+          forma-railway:ci
+      - name: Aguardar o servidor e verificar o fluxo público
+        run: |
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent http://127.0.0.1:3001/api/health; then break; fi
+            sleep 2
+          done
+          npm run smoke -- http://127.0.0.1:3001
+      - name: Logs e encerramento do container de teste
+        if: always()
+        run: |
+          docker logs forma-ci || true
+          docker rm -f forma-ci || true

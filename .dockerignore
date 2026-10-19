@@ -1,0 +1,14 @@
+node_modules
+**/node_modules
+**/dist
+.git
+**/.git
+.env
+.env.*
+**/.env
+**/.env.*
+*.zip
+*.log
+test-results
+work
+outputs

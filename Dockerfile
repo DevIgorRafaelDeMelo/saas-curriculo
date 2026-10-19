@@ -1,0 +1,32 @@
+# syntax=docker/dockerfile:1
+FROM node:22-bookworm-slim AS build
+WORKDIR /app
+ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
+RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
+COPY package.json package-lock.json .npmrc ./
+COPY apps/api/package.json ./apps/api/package.json
+COPY apps/web/package.json ./apps/web/package.json
+COPY packages/shared/package.json ./packages/shared/package.json
+RUN npm ci --workspaces=false --include=dev
+COPY apps ./apps
+COPY packages ./packages
+COPY scripts ./scripts
+RUN npm run db:generate && npm run build
+RUN npm prune --workspaces=false --omit=dev --ignore-scripts
+
+FROM node:22-bookworm-slim AS runtime
+WORKDIR /app
+ENV NODE_ENV=production \
+    PLAYWRIGHT_BROWSERS_PATH=/ms-playwright \
+    PDF_CONCURRENCY=1
+RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates tini && rm -rf /var/lib/apt/lists/*
+COPY --from=build /app/package.json /app/package-lock.json /app/.npmrc ./
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/apps ./apps
+COPY --from=build /app/packages ./packages
+COPY --from=build /app/scripts ./scripts
+RUN node node_modules/playwright/cli.js install --with-deps --only-shell chromium && chmod -R a+rX /ms-playwright && rm -rf /var/lib/apt/lists/*
+USER node
+EXPOSE 3001
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD ["node", "--import", "tsx", "scripts/start.mjs"]

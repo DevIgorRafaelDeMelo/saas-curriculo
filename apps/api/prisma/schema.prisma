@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+model User {
+  id String @id @default(cuid())
+  googleSub String @unique
+  email String @unique
+  name String
+  createdAt DateTime @default(now())
+  sessions Session[]
+  resumes Resume[]
+  orders Order[]
+  auditLogs AuditLog[]
+}
+model Session {
+  id String @id @default(cuid())
+  tokenHash String @unique
+  userId String
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  @@index([userId])
+  @@index([expiresAt])
+}
+model Resume {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  name String
+  templateId String
+  template ResumeTemplate @relation(fields:[templateId], references:[id])
+  data Json
+  revision Int @default(1)
+  sections ResumeSection[]
+  orders Order[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([userId, updatedAt])
+}
+model ResumeSection {
+  id String @id @default(cuid())
+  resumeId String
+  resume Resume @relation(fields:[resumeId], references:[id], onDelete:Cascade)
+  kind String
+  position Int
+  visible Boolean @default(true)
+  data Json
+  @@unique([resumeId, position])
+}
+model ResumeTemplate {
+  id String @id
+  name String
+  description String
+  style String
+  ats Boolean @default(true)
+  active Boolean @default(true)
+  priceCents Int @default(1990)
+  resumes Resume[]
+  orders Order[]
+}
+model Order {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  resumeId String
+  resume Resume @relation(fields:[resumeId], references:[id], onDelete:Cascade)
+  templateId String
+  template ResumeTemplate @relation(fields:[templateId], references:[id])
+  snapshot Json
+  revision Int
+  amountCents Int
+  currency String @default("BRL")
+  status String @default("created")
+  requestKey String
+  preferenceId String?
+  checkoutUrl String?
+  payments Payment[]
+  entitlement DownloadEntitlement?
+  createdAt DateTime @default(now())
+  @@unique([userId, requestKey])
+  @@index([userId, createdAt])
+}
+model Payment {
+  id String @id @default(cuid())
+  providerId String @unique
+  providerUpdatedAt DateTime
+  orderId String
+  order Order @relation(fields:[orderId], references:[id], onDelete:Cascade)
+  status String
+  amountCents Int
+  updatedAt DateTime @updatedAt
+  @@index([orderId])
+}
+model DownloadEntitlement {
+  id String @id @default(cuid())
+  orderId String @unique
+  order Order @relation(fields:[orderId], references:[id], onDelete:Cascade)
+  active Boolean @default(true)
+  createdAt DateTime @default(now())
+}
+model AuditLog {
+  id String @id @default(cuid())
+  userId String?
+  user User? @relation(fields:[userId], references:[id], onDelete:SetNull)
+  action String
+  resourceId String?
+  createdAt DateTime @default(now())
+  @@index([userId, createdAt])
+}
+
