@@ -60,7 +60,7 @@ export function Gallery() {
         <div className="eyebrow">SEU TALENTO, SUA FORMA</div>
         <h1>Encontre seu próximo currículo.</h1>
         <p>
-          Oito estilos. Muitas possibilidades. Uma história que só você pode
+          Dezoito estilos. Muitas possibilidades. Uma história que só você pode
           contar.
         </p>
         <div className="tabs">
@@ -73,7 +73,7 @@ export function Gallery() {
               {f === "todos"
                 ? "Todos os modelos"
                 : f === "ats"
-                  ? "ATS-friendly"
+                  ? "Estruturado"
                   : "Visuais"}
             </button>
           ))}
@@ -108,7 +108,7 @@ export function Gallery() {
                     <h3>{server?.name || t.name}</h3>
                     <span>
                       {server ? money(server.priceCents) + " · " : ""}
-                      {t.ats ? "ATS-friendly" : "Visual"}
+                      {t.ats ? "Estruturado" : "Visual"}
                     </span>
                   </div>
                   <ArrowUpRight size={18} />

@@ -7,7 +7,7 @@ export const publicPages = {
   "/modelos": {
     title: "Modelos de currículo profissional para editar online | Forma",
     description:
-      "Conheça oito modelos de currículo, com opções ATS e visuais. Personalize seus dados, confira a prévia grátis e compre o PDF quando estiver pronto.",
+      "Conheça dezoito modelos de currículo, com estilos estruturados e visuais. Personalize seus dados, confira a prévia grátis e compre o PDF quando estiver pronto.",
   },
 };
 export function pageSeo(pathname: string) {

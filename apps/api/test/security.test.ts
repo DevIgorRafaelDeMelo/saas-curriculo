@@ -86,7 +86,8 @@ test("validação bloqueia URLs executáveis e imagem externa", () => {
   d.personal.photo = "https://example.com/photo.png";
   assert.equal(resumeSchema.safeParse(d).success, false);
 });
-test("oito modelos renderizam HTML escapado e marca d’água só na prévia", () => {
+test("dezoito modelos renderizam HTML escapado e marca d'água só na prévia", () => {
+  assert.equal(templates.length, 18);
   for (const t of templates) {
     const d = emptyResume();
     d.templateId = t.id;

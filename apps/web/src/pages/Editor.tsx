@@ -789,7 +789,7 @@ export function Editor() {
                                 .priceCents,
                             )
                           : t.ats
-                            ? "ATS-friendly"
+                            ? "Estruturado"
                             : "Visual"}
                       </small>
                       {data.templateId === t.id && <CheckCircle2 size={16} />}

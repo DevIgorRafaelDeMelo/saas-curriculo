@@ -721,6 +721,33 @@ em {
   border-top: 5px solid var(--accent);
   padding-top: 15px;
 }
+.contemporaneo .paper-header { border-bottom: 4px solid var(--accent); padding-bottom: 11px; }
+.contemporaneo .paper-name { font-size: 25px; }
+.sobrio .paper-header { border-bottom: 1px solid #89938e; }
+.sobrio .paper-name { color: #303634; font-size: 20px; letter-spacing: 0; }
+.sobrio h4 { color: #303634; border-bottom-color: #aab1ad; }
+.impacto .paper-header { background: linear-gradient(110deg, var(--accent) 0 74%, #e8eee8 74%); border: 0; padding: 15px; margin: -15px -10px 12px; }
+.impacto .paper-name, .impacto .paper-role, .impacto .paper-contact { color: white; }
+.impacto h4 { border-left: 4px solid var(--accent); border-bottom: 0; padding-left: 7px; }
+.editorial .paper-header { border-top: 1px solid var(--accent); border-bottom: 5px double var(--accent); text-align: center; padding: 10px 0; }
+.editorial .paper-name, .classico-moderno .paper-name { font-family: Georgia, serif; }
+.editorial h4, .classico-moderno h4 { font-family: Georgia, serif; text-transform: none; letter-spacing: .4px; }
+.tecnico .paper-header { background: #f1f5f3; border-left: 6px solid var(--accent); padding: 12px; margin: -10px -8px 12px; }
+.tecnico .paper-name, .tecnico h4 { font-family: monospace; }
+.tecnico h4 { border-bottom: 2px solid var(--accent); }
+.essencial .paper-header { border: 0; }
+.essencial .paper-name { color: #202725; font-weight: 400; font-size: 24px; }
+.essencial h4 { border: 0; color: #202725; margin-top: 19px; }
+.arquiteto { border-left: 9px solid var(--accent); padding-left: 16px; }
+.arquiteto .paper-header { border: 0; background: #f3f6f2; padding: 12px; margin-left: -16px; }
+.arquiteto h4 { background: var(--accent); border: 0; color: white; padding: 4px 6px; }
+.lateral { border-left: 20px solid var(--accent); padding-left: 16px; }
+.lateral .paper-header { border-bottom: 3px solid var(--accent); }
+.lateral h4 { border-left: 4px solid var(--accent); border-bottom: 0; padding-left: 7px; }
+.classico-moderno .paper-header { border-top: 5px solid var(--accent); border-bottom: 1px solid var(--accent); padding: 12px 0; }
+.nordico .paper-header { background: #f0f5f1; border: 0; padding: 14px; margin: -8px -7px 12px; }
+.nordico h4 { background: #e5eee7; border: 0; color: #345b4f; padding: 4px 6px; }
+.nordico .paper-item { border-left: 1px solid #c9d6cd; padding-left: 7px; }
 .how-section {
   background: #f7f8f2;
   border-top: 1px solid #edf0e6;

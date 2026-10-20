@@ -128,7 +128,7 @@ export function Home() {
           <LayoutTemplate /> Modelos para cada momento
         </div>
         <div>
-          <CheckCircle2 /> Modelos ATS-friendly*
+          <CheckCircle2 /> Modelos estruturados
         </div>
       </div>
       <section className="section">
@@ -161,17 +161,13 @@ export function Home() {
               <div className="template-info">
                 <div>
                   <h3>{t.name}</h3>
-                  <span>Essencial · ATS-friendly</span>
+                  <span>Essencial · Estruturado</span>
                 </div>
                 <ArrowUpRight size={19} />
               </div>
             </Link>
           ))}
         </div>
-        <p className="footnote">
-          * Modelos sinalizados priorizam estrutura simples e texto
-          selecionável. A leitura varia conforme o sistema.
-        </p>
       </section>
       <section className="how-section" id="como-funciona">
         <div className="section">
@@ -244,7 +240,7 @@ export function Home() {
           <ul>
             {[
               "Editor completo e prévia gratuitos",
-              "8 modelos profissionais",
+              "18 modelos profissionais",
               "Cores e fontes personalizáveis",
               "PDF A4 com texto selecionável",
               "Arquivo da versão e modelo comprados",
