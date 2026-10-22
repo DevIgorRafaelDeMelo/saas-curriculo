@@ -95,10 +95,14 @@ export function mountFrontend(
       inLanguage: "pt-BR",
     }).replace(/</g, "\\u003c");
     const head = `<title>${escape(seo.title)}</title><meta name="description" content="${escape(seo.description)}"><meta name="robots" content="${seo.index ? "index, follow" : "noindex, nofollow"}"><meta name="forma-origin" content="${escape(base)}"><meta property="og:type" content="website"><meta property="og:locale" content="pt_BR"><meta property="og:site_name" content="Forma"><meta property="og:title" content="${escape(seo.title)}"><meta property="og:description" content="${escape(seo.description)}"><meta property="og:url" content="${url}">${seo.index ? `<link rel="canonical" href="${url}"><script id="forma-structured-data" type="application/ld+json">${structured}</script>` : ""}`;
+    const googleVerification =
+      req.path === "/"
+        ? '<meta name="google-site-verification" content="aKVMa03vQpuckoY6qEmWEUjl1qSbk4NiWsiCkA8QlP8" />'
+        : "";
     let html = shell
       .replace(/<title>[\s\S]*?<\/title>/i, "")
       .replace(/<meta\s+name=["']description["'][^>]*>/i, "")
-      .replace("</head>", head + "</head>");
+      .replace("</head>", googleVerification + head + "</head>");
     const content = documents.get(req.path);
     if (content)
       html = html.replace(
