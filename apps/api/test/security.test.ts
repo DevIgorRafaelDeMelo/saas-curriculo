@@ -41,11 +41,11 @@ test("webhook aceita assinatura válida e rejeita alterações, segredo ausente 
   assert.equal(verifySignature("ts=bad,v1=bad", requestId, id, secret), false);
 });
 test("pagamento confere pedido, valor, moeda, vendedor e metadata", () => {
-  const order = { id: "o1", currency: "BRL", amountCents: 1990 };
+  const order = { id: "o1", currency: "BRL", amountCents: 399 };
   const p = {
     external_reference: "o1",
     currency_id: "BRL",
-    transaction_amount: 19.9,
+    transaction_amount: 3.99,
     collector_id: 42,
     metadata: { order_id: "o1" },
   };

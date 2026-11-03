@@ -58,10 +58,10 @@ export function Gallery() {
     <main className="page">
       <div className="center gallery-head">
         <div className="eyebrow">SEU TALENTO, SUA FORMA</div>
-        <h1>Encontre seu próximo currículo.</h1>
+        <h1>Crie seu currículo grátis online.</h1>
         <p>
-          Dezoito estilos. Muitas possibilidades. Uma história que só você pode
-          contar.
+          Escolha um modelo, edite seus dados e veja a prévia grátis. O PDF
+          final é pago quando você decidir baixar.
         </p>
         <div className="tabs">
           {["todos", "ats", "visual"].map((f) => (

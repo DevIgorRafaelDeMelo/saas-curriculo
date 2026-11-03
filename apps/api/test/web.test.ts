@@ -60,11 +60,11 @@ test("SEO usa domínio configurado, sitemap público, noindex privado e 404 real
     home.payload,
     /rel="canonical" href="https:\/\/curriculos.example\/"/,
   );
-  assert.match(home.payload, /Criar currículo profissional online/);
+  assert.match(home.payload, /Currículo grátis online: crie e edite seu currículo/);
   assert.match(home.payload, /application\/ld\+json/);
   assert.equal(home.headers["x-robots-tag"], "index, follow");
   const models = await get("/modelos");
-  assert.match(models.payload, /Modelos de currículo profissional/);
+  assert.match(models.payload, /Modelos de currículo grátis para editar online/);
   const sitemap = await get("/sitemap.xml");
   assert.match(
     sitemap.payload,

@@ -55,18 +55,18 @@ export function Home() {
             <span /> SUA CARREIRA, BEM APRESENTADA
           </div>
           <h1>
-            Seu próximo capítulo
+            Crie seu currículo
             <br />
-            começa com um
+            profissional
             <br />
-            <em>bom currículo.</em>
+            <em>grátis online.</em>
           </h1>
           <p>
-            Você tem a história. A gente ajuda a contar.
+            Edite seus dados e veja a prévia sem custo.
             <br />
-            Crie um currículo profissional que abre portas,
+            Pague somente se quiser baixar
             <br />
-            em poucos minutos.
+            o PDF final por versão e modelo.
           </p>
           <div className="hero-buttons">
             <Link to="/editor" className="button large">
@@ -78,7 +78,7 @@ export function Home() {
           </div>
           <div className="hero-assurances">
             <span>
-              <Check size={15} /> Edição gratuita
+              <Check size={15} /> Edição e prévia grátis
             </span>
             <span>
               <Check size={15} /> Sem cartão de crédito
@@ -233,13 +233,13 @@ export function Home() {
             {price !== null ? money(price) : "Consulte no checkout"}
             <small>
               {price !== null
-                ? "a partir de · por versão e modelo"
+                ? "PDF final pago por versão e modelo"
                 : "Preço confirmado pelo servidor"}
             </small>
           </div>
           <ul>
             {[
-              "Editor completo e prévia gratuitos",
+              "Editor completo e prévia grátis",
               "18 modelos profissionais",
               "Cores e fontes personalizáveis",
               "PDF A4 com texto selecionável",

@@ -1,13 +1,13 @@
 export const publicPages = {
   "/": {
-    title: "Criar currículo profissional online com prévia grátis | Forma",
+    title: "Currículo grátis online: crie e edite seu currículo | Forma",
     description:
-      "Crie seu currículo online com modelos profissionais, edição e prévia gratuitas. Escolha seu estilo e compre o PDF da versão desejada, sem assinatura.",
+      "Crie e edite seu currículo grátis online com modelos profissionais e prévia gratuita. O PDF final é pago, sem assinatura.",
   },
   "/modelos": {
-    title: "Modelos de currículo profissional para editar online | Forma",
+    title: "Modelos de currículo grátis para editar online | Forma",
     description:
-      "Conheça dezoito modelos de currículo, com estilos estruturados e visuais. Personalize seus dados, confira a prévia grátis e compre o PDF quando estiver pronto.",
+      "Conheça modelos de currículo para criar e editar grátis online. Personalize, veja a prévia gratuita e pague somente pelo PDF final.",
   },
 };
 export function pageSeo(pathname: string) {

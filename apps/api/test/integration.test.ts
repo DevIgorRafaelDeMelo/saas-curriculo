@@ -37,7 +37,7 @@ test(
           external_reference: orderId,
           metadata: { order_id: orderId },
           currency_id: "BRL",
-          transaction_amount: 19.9,
+          transaction_amount: 3.99,
           collector_id: 42,
           status: state,
           date_last_updated: new Date(version).toISOString(),
@@ -163,7 +163,7 @@ test(
       assert.equal(purchase.status, 201);
       const order: any = await purchase.json();
       orderId = order.id;
-      assert.equal(order.amountCents, 1990);
+      assert.equal(order.amountCents, 399);
       const repeat: any = await (
         await call("/orders", { method: "POST", body }, sid)
       ).json();

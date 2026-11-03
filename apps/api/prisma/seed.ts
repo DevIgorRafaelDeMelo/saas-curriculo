@@ -6,7 +6,7 @@ try {
   for (const t of templates)
     await db.resumeTemplate.upsert({
       where: { id: t.id },
-      create: { ...t, priceCents: 1990 },
+      create: { ...t, priceCents: 399 },
       update: {},
     });
 } finally {
